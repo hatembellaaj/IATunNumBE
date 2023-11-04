@@ -32,7 +32,7 @@ def videoToText():
 
 @app.route('/task/<language>', methods=['POST', 'GET'])
 def task(language):
-    print("into task ")
+    print("into task : language : ", language)
     strWhisper = 'whisper audio.wav  --language '+ language + ' --model small'
     subprocess.Popen(strWhisper, shell=True, stdout=subprocess.PIPE).stdout.read()
     return send_file('audio.txt')
