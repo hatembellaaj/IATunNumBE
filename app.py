@@ -23,6 +23,7 @@ def videoToText():
            <form method="POST">
                <div><label>videourl: <input type="text" name="videourl"></label></div>
                 <div><select name="language" id="language">
+                <option value=""></option>
                 <option value="fr">fr</option>
                 <option value="en">en</option>
                 <option value="ar">ar</option>
