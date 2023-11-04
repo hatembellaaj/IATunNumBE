@@ -11,7 +11,7 @@ def videoToText():
         videourl = request.form.get('videourl')
  
         #namevideo = videourl.split('/')[-1]
-        strWav = 'yt-dlp -xv --ffmpeg-location /root/anaconda3/bin/ffmpeg --audio-format wav  -o lecun.wav -- \'' + videourl + '\''
+        strWav = 'yt-dlp -xv --ffmpeg-location /root/anaconda3/bin/ffmpeg --audio-format wav  -o audio.wav -- \'' + videourl + '\''
         #strWav = 'yt-dlp -xv --ffmpeg-location /opt/homebrew/bin/ffmpeg --audio-format wav -o audio.wav -- \'' + videourl + '\''
         res = subprocess.Popen(strWav, shell=True, stdout=subprocess.PIPE).stdout.read()
         print("audio file created : ",res)
