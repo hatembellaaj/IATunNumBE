@@ -8,7 +8,7 @@ def videoToText():
         # handle the POST request
     if request.method == 'POST':
         videourl = request.form.get('videourl')
-        strWav = 'yt-dlp -xv --ffmpeg-location ffmpeg-master-latest-linux64-gpl/bin --audio-format wav  -o lecun.wav -- \'' + videourl + '\''
+        strWav = 'yt-dlp -xv --ffmpeg-location /root/anaconda3/bin/ffmpeg --audio-format wav  -o lecun.wav -- \'' + videourl + '\''
         subprocess.Popen(strWav, shell=True, stdout=subprocess.PIPE).stdout.read()
         strWhisper = 'whisper lecun.wav  --model small' 
         res = subprocess.Popen(strWhisper, shell=True, stdout=subprocess.PIPE).stdout.read()
