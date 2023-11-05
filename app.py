@@ -75,7 +75,7 @@ def videoToText():
 def task(language,translateto):
     print("into task : language : ", language)
     print("into task : translateto : ", translateto)
-    if(translateto!=""):
+    if(translateto==""):
         strWhisper = 'whisper audio.wav  --language '+ language + ' --model small'
     else:
         strWhisper = 'whisper audio.wav --task transcribe '+ translateto +' --language '+ language + ' --model small'
