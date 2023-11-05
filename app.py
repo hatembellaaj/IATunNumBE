@@ -36,6 +36,7 @@ def videoToText():
 def task(language):
     print("into task : language : ", language)
     strWhisper = 'whisper audio.wav  --language '+ language + ' --model small'
+    print("strWhisper : ",strWhisper)
     subprocess.Popen(strWhisper, shell=True, stdout=subprocess.PIPE).stdout.read()
     return send_file('audio.txt')
 
