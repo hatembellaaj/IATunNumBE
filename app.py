@@ -10,13 +10,14 @@ def videoToText():
         
         videourl = request.form.get('videourl')
         language = request.form.get('language')
+        translateto = request.form.get('translateto')
  
         #namevideo = videourl.split('/')[-1]
         strWav = 'yt-dlp -xv --ffmpeg-location /root/anaconda3/bin/ffmpeg --audio-format wav  -o audio.wav -- \'' + videourl + '\''
         #strWav = 'yt-dlp -xv --ffmpeg-location /opt/homebrew/bin/ffmpeg --audio-format wav -o audio.wav -- \'' + videourl + '\''
         res = subprocess.Popen(strWav, shell=True, stdout=subprocess.PIPE).stdout.read()
         print("audio file created : ",res)
-        return render_template ("loading.html", language=language)
+        return render_template ("loading.html", language=language, translateto=translateto)
 
 
     # otherwise handle the GET request
