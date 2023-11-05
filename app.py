@@ -61,13 +61,25 @@ def videoToText():
                 <option value="en">en</option>
                 <option value="ar">ar</option>
                 </select></div>
+                <div><label>TRANSLATE TO: </label><select name="translateto" id="translateto">
+                <option value=""></option>
+                <option value="fr">fr</option>
+                <option value="en">en</option>
+                <option value="ar">ar</option>
+                </select></div>
                <input type="submit" value="Submit">
            </form>'''
 
-@app.route('/task/<language>', methods=['POST', 'GET'])
+@app.route('/task/<language>/<translateto>', methods=['POST', 'GET'])
 def task(language):
     print("into task : language : ", language)
-    strWhisper = 'whisper audio.wav  --language '+ language + ' --model small'
+    print("into task : translateto : ", translateto)
+    if(translateto!=""):
+        strWhisper = 'whisper audio.wav  --language '+ language + ' --model small'
+    else:
+        strWhisper = 'whisper audio.wav --task transcribe '+ translateto +' --language '+ language + ' --model small'
+
+    
     print("strWhisper : ",strWhisper)
     subprocess.Popen(strWhisper, shell=True, stdout=subprocess.PIPE).stdout.read()
     return send_file('audio.txt')
