@@ -54,8 +54,8 @@ def videoToText():
                 }
             </style>
            <form method="POST">
-               <div><label>videourl: <input type="text" name="videourl"></label></div>
-                <div><select name="language" id="language">
+               <div><label>VIDEO URL: </label><input type="text" name="videourl"></div>
+                <div><label>VIDEO LANGUAGE: </label><select name="language" id="language">
                 <option value=""></option>
                 <option value="fr">fr</option>
                 <option value="en">en</option>
