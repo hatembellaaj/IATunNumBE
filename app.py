@@ -71,7 +71,7 @@ def videoToText():
            </form>'''
 
 @app.route('/task/<language>/<translateto>', methods=['POST', 'GET'])
-def task(language):
+def task(language,translateto):
     print("into task : language : ", language)
     print("into task : translateto : ", translateto)
     if(translateto!=""):
