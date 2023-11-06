@@ -62,7 +62,7 @@ def videoToText():
                 <option value="en">en</option>
                 <option value="ar">ar</option>
                 </select></div>
-                <div><label>TRANSLATE TO: </label><select name="translateto" id="translateto">
+                <div><label>TRANSLATE TO: (NOT YET DONE - Only english language is supported)</label><select name="translateto" id="translateto">
                 <option value=""></option>
                 <option value="fr">fr</option>
                 <option value="en">en</option>
@@ -75,6 +75,7 @@ def videoToText():
 def task(language,translateto):
     print("into task : language : ", language)
     print("into task : translateto : ", translateto)
+    translateto=""
     if(translateto==""):
         strWhisper = 'whisper audio.wav  --language '+ language + ' --model small'
     else:
