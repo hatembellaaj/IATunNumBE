@@ -88,7 +88,7 @@ def task(language,translateto):
 # Page d'accueil avec le formulaire pour l'upload
 @app.route('/index2')
 def index2():
-    return render_template('index2.html')
+    return render_template('index.html')
 
 # Route pour gérer l'upload de fichier
 @app.route('/upload', methods=['POST'])
