@@ -88,16 +88,22 @@ def task(language,translateto):
 # Page d'accueil avec le formulaire pour l'upload
 @app.route('/index2')
 def index2():
-    return render_template('index.html')
+    files = os.listdir('uploads')  # Liste des fichiers dans le dossier "uploads"
+    return render_template('index.html', files=files)
 
 # Route pour gérer l'upload de fichier
 @app.route('/upload', methods=['POST'])
 def upload_file():
     uploaded_file = request.files['file']
     if uploaded_file.filename != '':
-        uploaded_file.save(uploaded_file.filename)
+        uploaded_file.save('uploads/' + uploaded_file.filename)  # Enregistre le fichier dans le dossier "uploads"
         return 'Fichier uploadé avec succès : ' + uploaded_file.filename
     else:
         return 'Aucun fichier sélectionné'
+
+# Route pour télécharger un fichier
+@app.route('/download/<filename>')
+def download_file(filename):
+    return send_file('uploads/' + filename, as_attachment=True)
 
 

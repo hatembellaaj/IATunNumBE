@@ -1,10 +1,28 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Upload de fichier</title>
-</head>
-<body>
+    <head>
+        <meta charset="utf-8">
+        <title>Upload et Téléchargement de Fichiers</title>
+    </head>
+    <body>
+        <h1>Upload et Téléchargement de Fichiers avec Flask</h1>
+        
+        <h2>Upload de fichier</h2>
+        <form method="POST" action="/upload" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+        </form>
+        
+        <h2>Liste des fichiers dans le dossier "uploads"</h2>
+        <ul>
+            {% for file in files %}
+                <li>
+                    {{ file }} 
+                    <a href="/download/{{ file }}" download>Télécharger</a>
+                </li>
+            {% endfor %}
+        </ul>
+        
     <h1>Upload de fichier avec Flask</h1>
     <form method="POST" action="/upload" enctype="multipart/form-data">
         <input type="file" name="file">
