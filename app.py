@@ -87,8 +87,8 @@ def task(language,translateto):
     return send_file('audio.txt')
 
 # Page d'accueil avec le formulaire pour l'upload
-@app.route('/index2')
-def index2():
+@app.route('/home')
+def home():
     files = os.listdir('uploads')  # Liste des fichiers dans le dossier "uploads"
     return render_template('index.html', files=files)
 
@@ -98,7 +98,7 @@ def upload_file():
     uploaded_file = request.files['file']
     if uploaded_file.filename != '':
         uploaded_file.save('uploads/' + uploaded_file.filename)  # Enregistre le fichier dans le dossier "uploads"
-        return 'Fichier uploadé avec succès : ' + uploaded_file.filename
+        return home() #'Fichier uploadé avec succès : ' + uploaded_file.filename
     else:
         return 'Aucun fichier sélectionné'
 
