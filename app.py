@@ -84,7 +84,30 @@ def task(language,translateto):
     
     print("strWhisper : ",strWhisper)
     subprocess.Popen(strWhisper, shell=True, stdout=subprocess.PIPE).stdout.read()
-    return send_file('audio.txt')
+
+
+    # Dossier source contenant les fichiers
+    dossier_source = '.'
+
+    # Dossier de destination où vous voulez déplacer les fichiers
+    dossier_destination = './uploads'
+
+    # Liste tous les fichiers dans le dossier source
+    fichiers_source = os.listdir(dossier_source)
+
+    # Parcourt la liste des fichiers
+    for fichier in fichiers_source:
+        # Vérifie si le nom du fichier commence par "audio"
+        if fichier.startswith('audio'):
+            # Chemin complet du fichier source
+            chemin_source = os.path.join(dossier_source, fichier)
+            # Chemin complet du fichier de destination (incluant le nom du fichier)
+            chemin_destination = os.path.join(dossier_destination, fichier)
+            # Déplace le fichier vers le dossier de destination
+            shutil.move(chemin_source, chemin_destination)
+            print(f'Fichier {fichier} déplacé avec succès vers {dossier_destination}')
+
+    return home() #send_file('audio.txt')
 
 # Page d'accueil avec le formulaire pour l'upload
 @app.route('/home')
