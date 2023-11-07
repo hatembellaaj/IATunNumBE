@@ -85,4 +85,19 @@ def task(language,translateto):
     subprocess.Popen(strWhisper, shell=True, stdout=subprocess.PIPE).stdout.read()
     return send_file('audio.txt')
 
+# Page d'accueil avec le formulaire pour l'upload
+@app.route('/index2')
+def index2():
+    return render_template('index2.html')
+
+# Route pour gérer l'upload de fichier
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    uploaded_file = request.files['file']
+    if uploaded_file.filename != '':
+        uploaded_file.save(uploaded_file.filename)
+        return 'Fichier uploadé avec succès : ' + uploaded_file.filename
+    else:
+        return 'Aucun fichier sélectionné'
+
 
