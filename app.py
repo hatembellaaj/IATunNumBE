@@ -79,9 +79,9 @@ def task(language,translateto):
     print("into task : translateto : ", translateto)
     translateto=""
     if(translateto==""):
-        strWhisper = 'whisper audio.wav  --language '+ language + ' --model base'
+        strWhisper = 'whisper audio.wav  --language '+ language + ' --model small'
     else:
-        strWhisper = 'whisper audio.wav --task transcribe '+ translateto +' --language '+ language + ' --model base'
+        strWhisper = 'whisper audio.wav --task transcribe '+ translateto +' --language '+ language + ' --model small'
 
     
     print("strWhisper : ",strWhisper)
