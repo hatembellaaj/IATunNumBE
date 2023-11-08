@@ -63,6 +63,7 @@ def videoToText():
                 <option value="fr">fr</option>
                 <option value="en">en</option>
                 <option value="ar">ar</option>
+                <option value="ru">ru</option>
                 </select></div>
                 <div><label>TRANSLATE TO: (NOT YET DONE - Only english language is supported)</label><select name="translateto" id="translateto">
                 <option value="en" selected="selected">en</option>
