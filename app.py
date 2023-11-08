@@ -13,13 +13,14 @@ def videoToText():
         videourl = request.form.get('videourl')
         language = request.form.get('language')
         translateto = request.form.get('translateto')
+        model=request.form.get('model')
  
         #namevideo = videourl.split('/')[-1]
         strWav = 'yt-dlp -xv --ffmpeg-location /root/anaconda3/bin/ffmpeg --audio-format wav  -o audio.wav -- \'' + videourl + '\''
         #strWav = 'yt-dlp -xv --ffmpeg-location /opt/homebrew/bin/ffmpeg --audio-format wav -o audio.wav -- \'' + videourl + '\''
         res = subprocess.Popen(strWav, shell=True, stdout=subprocess.PIPE).stdout.read()
         print("audio file created : ",res)
-        return render_template ("loading.html", language=language, translateto=translateto)
+        return render_template ("loading.html", language=language, translateto=translateto, model=model)
 
 
     # otherwise handle the GET request
@@ -70,18 +71,29 @@ def videoToText():
                 <option value="fr">fr</option>
                 <option value="ar">ar</option>
                 </select></div>
+
+                <div><label>MODEL: </label><select name="model" id="model">
+                <option value="tiny">tiny - 39M</option>
+                <option value="base" selected="selected">base - 74M</option>
+                <option value="small">small - 244M</option>
+                <option value="medium">medium - 769M</option>
+                <option value="large">large - 1550M</option>
+                <option value="large-v2">large-v2 - 1550M</option>
+                </select></div>
+
                <input type="submit" value="Submit">
            </form>'''
 
-@app.route('/task/<language>/<translateto>', methods=['POST', 'GET'])
+@app.route('/task/<language>/<translateto>/<model>', methods=['POST', 'GET'])
 def task(language,translateto):
     print("into task : language : ", language)
     print("into task : translateto : ", translateto)
+    print("into task : model : ", translateto)
     translateto=""
     if(translateto==""):
-        strWhisper = 'whisper audio.wav  --language '+ language + ' --model small'
+        strWhisper = 'whisper audio.wav  --language '+ language + ' --model ' + model
     else:
-        strWhisper = 'whisper audio.wav --task transcribe '+ translateto +' --language '+ language + ' --model small'
+        strWhisper = 'whisper audio.wav --task transcribe '+ translateto +' --language '+ language + ' --model ' + model
 
     
     print("strWhisper : ",strWhisper)
