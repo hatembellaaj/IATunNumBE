@@ -109,6 +109,10 @@ def task(language,translateto,model):
     # Liste tous les fichiers dans le dossier source
     fichiers_source = os.listdir(dossier_source)
 
+    #Supprimer le contenu du dossier uploads
+    supprimer_contenu_dossier(fichiers_source);
+    
+    #vider 
     # Parcourt la liste des fichiers
     for fichier in fichiers_source:
         # Vérifie si le nom du fichier commence par "audio"
@@ -122,6 +126,27 @@ def task(language,translateto,model):
             print(f'Fichier {fichier} déplacé avec succès vers {dossier_destination}')
 
     return home() #send_file('audio.txt')
+
+def supprimer_contenu_dossier(chemin_dossier):
+    try:
+        # Vérifier si le dossier existe
+        if os.path.exists(chemin_dossier):
+            # Parcourir tous les fichiers et sous-dossiers dans le dossier
+            for element in os.listdir(chemin_dossier):
+                chemin_element = os.path.join(chemin_dossier, element)
+
+                # Vérifier s'il s'agit d'un fichier et le supprimer
+                if os.path.isfile(chemin_element):
+                    os.unlink(chemin_element)
+                # Vérifier s'il s'agit d'un dossier et le supprimer récursivement
+                elif os.path.isdir(chemin_element):
+                    shutil.rmtree(chemin_element)
+
+            print(f"Le contenu du dossier '{chemin_dossier}' a été supprimé.")
+        else:
+            print(f"Le dossier '{chemin_dossier}' n'existe pas.")
+    except Exception as e:
+        print(f"Une erreur s'est produite : {e}")
 
 # Page d'accueil avec le formulaire pour l'upload
 @app.route('/home')
